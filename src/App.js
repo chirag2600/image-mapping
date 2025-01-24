@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Arrow, Image, Layer, Rect, Stage, Text } from "react-konva";
+import "./App.css"; // Import the CSS file
 
 const App = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -117,24 +118,34 @@ const App = () => {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>Interactive Image Editor</h1>
-      <input type="file" onChange={handleImageUpload} accept="image/*" />
-      <button onClick={handleAddPart} disabled={!uploadedImage}>
-        Add Part
-      </button>
-      <button onClick={startDrawingArrow} disabled={!uploadedImage}>
-        Draw Arrow
-      </button>
-      <button onClick={startAddingText} disabled={!uploadedImage}>
-        Add Text
-      </button>
-      <div
-        style={{ margin: "20px auto", width: "80%", border: "1px solid black" }}
-      >
+    <div className="app-container">
+      <h1 className="app-title">Interactive Image Editor</h1>
+      <div className="controls">
+      <label htmlFor="file-upload" className="file-upload-label">
+        📂 Choose File
+        <input
+          type="file"
+          id="file-upload"
+          onChange={handleImageUpload}
+          accept="image/*"
+          className="file-input-hidden"
+        />
+      </label>
+
+        <button onClick={handleAddPart} disabled={!uploadedImage} className="button">
+          Add Part
+        </button>
+        <button onClick={startDrawingArrow} disabled={!uploadedImage} className="button">
+          Draw Arrow
+        </button>
+        <button onClick={startAddingText} disabled={!uploadedImage} className="button">
+          Add Text
+        </button>
+      </div>
+      <div className="canvas-container">
         {uploadedImage && (
           <Stage
-            width={800}
+            width={1100}
             height={600}
             onClick={(e) => {
               handleArrowClick(e);
@@ -142,7 +153,7 @@ const App = () => {
             }}
           >
             <Layer>
-              <Image image={uploadedImage} width={800} height={600} />
+              <Image image={uploadedImage} width={1000} height={600} />
               {imageDetails.map((part) => (
                 <React.Fragment key={part.id}>
                   <Rect
