@@ -31,6 +31,7 @@ const AddModule = () => {
           <button className="preview-button" onClick={handlePreviewClick}>
             Preview
           </button>
+          &nbsp;&nbsp;&nbsp;
           <button className="save-button" onClick={handleSaveClick}>
             Save
           </button>
@@ -45,25 +46,30 @@ const AddModule = () => {
           <input type="file" accept="image/*" className="file-input" />
         </label>
       </div>
+      
 
       {/* Form Fields */}
       <form className="module-form">
         <div className="form-row">
           <div className="form-group">
             <label>Project ID:</label>
-            <input type="text" placeholder="Enter Project ID" />
+            <input
+              type="text" className="input-fields"
+            
+              placeholder="Enter Project ID"
+            />
           </div>
           <div className="form-group">
             <label>Part No.:</label>
             <input
-              type="text"
+              type="text" className="input-fields"
               placeholder="Enter Part No."
               onChange={(e) => setPartNumber(e.target.value)}
             />
           </div>
           <div className="form-group">
             <label>Flowchart Part Number:</label>
-            <input type="text" placeholder="Enter Flowchart Part Number" />
+            <input type="text" className="input-fields" placeholder="Enter Flowchart Part Number" />
           </div>
         </div>
 
@@ -72,12 +78,12 @@ const AddModule = () => {
             <label>Part Description:</label>
             <textarea
               readOnly
-              placeholder="Auto-generated description"
+              placeholder="Auto-generated description" className="input-fields"
             ></textarea>
           </div>
           <div className="form-group full-width">
             <label>Short Description:</label>
-            <textarea placeholder="Enter short description"></textarea>
+            <textarea className="input-fields" placeholder="Enter short description"></textarea>
           </div>
         </div>
       </form>
@@ -98,34 +104,44 @@ const AddModule = () => {
           {rows.map((row, index) => (
             <tr key={index}>
               <td>
-                <input type="text" placeholder="Part Number" />
+                <input type="text" className="input-fields" placeholder="Part Number" />
               </td>
               <td>
-                <input type="text" placeholder="Type" />
+                <input type="text" className="input-fields" placeholder="Type" />
               </td>
               <td>
-                <input type="text" placeholder="Description" />
+                <input type="text" className="input-fields" placeholder="Description" />
               </td>
               <td>
-                <input type="text" placeholder="Rev" />
+                <input type="text" className="input-fields" placeholder="Rev" />
               </td>
               <td className="action-buttons">
-                <button className="edit-row">✏️</button>
-                <button className="right-arrow">➡️</button>
-                <button
-                  className="delete-row"
-                  onClick={() => setRows(rows.filter((_, i) => i !== index))}
-                >
-                  🗑
-                </button>
+                <div className="button-row">
+                  <button className="edit-row">✏️</button>
+                  <button className="right-arrow">➡️</button>
+                  <button
+                      className="delete-row"
+                      style={{
+                        padding: "5px 10px",
+                        color: "red", // Makes the icon red
+                        border: "none",
+                        background: "transparent",
+                        fontSize: "16px", // Adjust size if needed
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setRows(rows.filter((_, i) => i !== index))}
+                    >
+                      🗑
+                    </button>
+                </div>
               </td>
+
             </tr>
           ))}
         </tbody>
       </table>
-      <button onClick={addRow} className="add-row-button">
-        + Add Row
-      </button>
+      <button onClick={addRow} className="add-row-button">+</button>
+
 
       {/* Save Modal */}
       {isModalOpen && (
